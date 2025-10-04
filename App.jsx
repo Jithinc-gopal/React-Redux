@@ -1,21 +1,17 @@
-import React from "react";
-import { connect } from "react-redux";
-import { increment,decrement } from "./component/action";
-function App({ value, increment, decrement }) {
+import React from 'react'
+// import { increment,decrement } from './component/action'
+import { useDispatch, useSelector } from 'react-redux'
+
+
+export const App = () => {
+  const count = useSelector(state=>state.value)
+  const dispatch = useDispatch()
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Count: {value}</h1>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+    <div>
+      <p>count:{count}</p>
+      <button onClick={()=>dispatch({type:"increment",payload:1})}>increment</button>
+      <button onClick={()=>dispatch({type:"decrement",payload:1})}>decrement</button>
     </div>
-  );
+  )
 }
-
-// map state & dispatch to props
-const mapStateToProps = (state) => ({
-  value: state.value,
-});
-
-const mapDispatchToProps = { increment, decrement };
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App

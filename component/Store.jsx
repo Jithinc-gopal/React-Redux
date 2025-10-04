@@ -1,31 +1,27 @@
 import { applyMiddleware, createStore } from "redux";
 import logger from "redux-logger";
 
-const appReducer = (prevState={value:0},action)=>{
+
+const appreducer = (prevSate={value:0},action)=>{
   switch(action.type){
-    case 'INCREMENT':
+    case "increment":
       return{
-      ...prevState,
-      value:prevState.value+1
+        ...prevSate,
+        value:prevSate.value+action.payload
+      }
+      case "decrement":
+        return{
+          ...prevSate,
+          value:prevSate.value-action.payload
 
-    }
-     case 'DECREMENT':
-      return{
-      ...prevState,
-      value:prevState.value-1
-
-    }
-    default:
-      return prevState
-
+        }
+        default:
+          return prevSate
+      
   }
 
 }
 
-const devTools =
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
 
-export const store = createStore(appReducer,devTools,applyMiddleware(logger))
-store.getState()
-
+ export const store = createStore(appreducer, applyMiddleware(logger))
